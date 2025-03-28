@@ -6,27 +6,25 @@ class Punto:
         self.y = y
 
     def __str__(self):
-        return f"({self.x},{self.y})"
+        return f"({self.x}, {self.y})"
 
     def cuadrante(self):
         if self.x == 0 and self.y == 0:
             return "El punto está en el origen."
-        elif self.x == 0:
+        if self.x == 0:
             return "El punto está sobre el eje Y."
-        elif self.y == 0:
+        if self.y == 0:
             return "El punto está sobre el eje X."
-        elif self.x > 0 and self.y > 0:
+        if self.x > 0 and self.y > 0:
             return "El punto está en el primer cuadrante."
-        elif self.x < 0 and self.y > 0:
+        if self.x < 0 and self.y > 0:
             return "El punto está en el segundo cuadrante."
-        elif self.x < 0 and self.y < 0:
+        if self.x < 0 and self.y < 0:
             return "El punto está en el tercer cuadrante."
-        elif self.x > 0 and self.y < 0:
-            return "El punto está en el cuarto cuadrante."
+        return "El punto está en el cuarto cuadrante."
 
     def vector(self, otro_punto):
-        return f"Vector resultante: ({otro_punto.x - self.x}, {otro_punto.y - self.y})"
+        return otro_punto.x - self.x, otro_punto.y - self.y
 
     def distancia(self, otro_punto):
-        distancia = math.sqrt((otro_punto.x - self.x) ** 2 + (otro_punto.y - self.y) ** 2)
-        return f"Distancia entre los puntos: {distancia:.2f}"
+        return math.sqrt((otro_punto.x - self.x) ** 2 + (otro_punto.y - self.y) ** 2)
