@@ -52,6 +52,10 @@ print("\nDistancias:")
 print(f"Distancia entre A y B: {dist_AB}")
 print(f"Distancia entre B y A: {dist_AB}")  # Es la misma, no es necesario calcularla dos veces
 
+# Mostrar la fórmula utilizada para calcular la distancia
+print("\nFórmula utilizada para calcular la distancia entre dos puntos:")
+print("distancia = sqrt((x2 - x1)^2 + (y2 - y1)^2)")
+
 # Determinar el punto más lejano del origen
 distancias = {nombre: distancia(coord, puntos["D"]) for nombre, coord in puntos.items()}
 mas_lejano = max(distancias.items(), key=lambda x: x[1])
