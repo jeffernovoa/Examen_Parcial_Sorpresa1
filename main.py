@@ -1,72 +1,53 @@
-import math
+from punto import Punto
+from rectangulo import Rectangulo
 
-# Crear los puntos
-puntos = {
-    "A": (2, 3),
-    "B": (5, 5),
-    "C": (-3, -1),
-    "D": (0, 0)
-}
+# Crear los puntos A, B, C y D
+A = Punto(2, 3)
+B = Punto(5, 5)
+C = Punto(-3, -1)
+D = Punto(0, 0)
 
 # Imprimir los puntos
-print("Puntos:")
-for nombre, coordenadas in puntos.items():
-    print(f"{nombre}: {coordenadas}")
+print("Coordenadas de los puntos:")
+print(f"  Punto A: ({A.x}, {A.y})")
+print(f"  Punto B: ({B.x}, {B.y})")
+print(f"  Punto C: ({C.x}, {C.y})")
+print(f"  Punto D: ({D.x}, {D.y})\n")
 
-# Función para determinar el cuadrante de un punto
-def cuadrante(punto):
-    x, y = punto
-    if x > 0 and y > 0:
-        return "I"
-    elif x < 0 and y > 0:
-        return "II"
-    elif x < 0 and y < 0:
-        return "III"
-    elif x > 0 and y < 0:
-        return "IV"
-    return "Eje"
+# Consultar a qué cuadrante pertenecen los puntos A, C y D
+print("Cuadrantes de los puntos:")
+print(f"  Cuadrante de A: {A.cuadrante()}")
+print(f"  Cuadrante de C: {C.cuadrante()}")
+print(f"  Cuadrante de D: {D.cuadrante()}\n")
 
-# Consultar cuadrantes
-print("\nCuadrantes:")
-for nombre in ["A", "C", "D"]:
-    print(f"{nombre} pertenece al cuadrante: {cuadrante(puntos[nombre])}")
+# Consultar los vectores AB y BA
+print("Vectores entre puntos:")
+print(f"  Vector AB: {A.vector(B)}")
+print(f"  Vector BA: {B.vector(A)}\n")
 
-# Función para calcular un vector entre dos puntos
-def vector(p1, p2):
-    return (p2[0] - p1[0], p2[1] - p1[1])
+# Consultar la distancia entre los puntos A y B, y B y A
+print("Distancias entre puntos:")
+print(f"  Distancia entre A y B: {A.distancia(B)}")
+print(f"  Distancia entre B y A: {B.distancia(A)}\n")
 
-# Consultar vectores AB y BA
-AB = vector(puntos["A"], puntos["B"])
-BA = vector(puntos["B"], puntos["A"])
-print("\nVectores:")
-print(f"Vector AB: {AB}")
-print(f"Vector BA: {BA}")
+# Imprimir la fórmula utilizada para calcular la distancia
+print("Fórmula utilizada para calcular la distancia entre dos puntos:")
+print("  distancia = sqrt((x2 - x1)^2 + (y2 - y1)^2)\n")
 
-# Función para calcular la distancia entre dos puntos
-def distancia(p1, p2):
-    return math.sqrt((p2[0] - p1[0])**2 + (p2[1] - p1[1])**2)
-
-# Consultar distancias entre A y B, y B y A
-dist_AB = distancia(puntos["A"], puntos["B"])
-print("\nDistancias:")
-print(f"Distancia entre A y B: {dist_AB}")
-print(f"Distancia entre B y A: {dist_AB}")  # Es la misma, no es necesario calcularla dos veces
-
-# Mostrar la fórmula utilizada para calcular la distancia
-print("\nFórmula utilizada para calcular la distancia entre dos puntos:")
-print("distancia = sqrt((x2 - x1)^2 + (y2 - y1)^2)")
-
-# Determinar el punto más lejano del origen
-distancias = {nombre: distancia(coord, puntos["D"]) for nombre, coord in puntos.items()}
-mas_lejano = max(distancias.items(), key=lambda x: x[1])
-print("\nPunto más lejano del origen:")
-print(f"El punto más lejano del origen es {mas_lejano[0]} con una distancia de {mas_lejano[1]}")
+# Determinar cuál de los puntos A, B o C está más lejos del origen
+distancias = {
+    "A": A.distancia(D),
+    "B": B.distancia(D),
+    "C": C.distancia(D)
+}
+punto_mas_lejos = max(distancias, key=distancias.get)
+print(f"El punto más lejos del origen es: {punto_mas_lejos}\n")
 
 # Crear un rectángulo utilizando los puntos A y B
-base = abs(puntos["B"][0] - puntos["A"][0])
-altura = abs(puntos["B"][1] - puntos["A"][1])
-area = base * altura
-print("\nRectángulo:")
-print(f"Base: {base}")
-print(f"Altura: {altura}")
-print(f"Área: {area}")
+rectangulo = Rectangulo(A, B)
+
+# Consultar la base, altura y área del rectángulo
+print("Propiedades del rectángulo formado por A y B:")
+print(f"  Base: {rectangulo.base()}")
+print(f"  Altura: {rectangulo.altura()}")
+print(f"  Área: {rectangulo.area()}")

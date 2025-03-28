@@ -1,22 +1,16 @@
-import math
-
 class Rectangulo:
-    def __init__(self, punto_inicial=(0, 0), punto_final=(0, 0)):
-        self.punto_inicial = punto_inicial
-        self.punto_final = punto_final
+    def __init__(self, punto1, punto2):
+        self.punto1 = punto1  # Primer punto (esquina inferior izquierda)
+        self.punto2 = punto2  # Segundo punto (esquina superior derecha)
 
     def base(self):
-        return abs(self.punto_final[0] - self.punto_inicial[0])
+        # La base es la diferencia en las coordenadas x
+        return abs(self.punto2.x - self.punto1.x)
 
     def altura(self):
-        return abs(self.punto_final[1] - self.punto_inicial[1])
+        # La altura es la diferencia en las coordenadas y
+        return abs(self.punto2.y - self.punto1.y)
 
     def area(self):
+        # El área es base * altura
         return self.base() * self.altura()
-
-# Ejemplo de uso
-if __name__ == "__main__":
-    rect = Rectangulo((1, 2), (4, 6))
-    print("Base:", rect.base())
-    print("Altura:", rect.altura())
-    print("Área:", rect.area())
