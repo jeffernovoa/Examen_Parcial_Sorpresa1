@@ -1,17 +1,17 @@
 import math
 
 # Crear los puntos
-A = (2, 3)
-B = (5, 5)
-C = (-3, -1)
-D = (0, 0)
+puntos = {
+    "A": (2, 3),
+    "B": (5, 5),
+    "C": (-3, -1),
+    "D": (0, 0)
+}
 
 # Imprimir los puntos
 print("Puntos:")
-print(f"A: {A}")
-print(f"B: {B}")
-print(f"C: {C}")
-print(f"D: {D}")
+for nombre, coordenadas in puntos.items():
+    print(f"{nombre}: {coordenadas}")
 
 # Función para determinar el cuadrante de un punto
 def cuadrante(punto):
@@ -24,22 +24,20 @@ def cuadrante(punto):
         return "III"
     elif x > 0 and y < 0:
         return "IV"
-    else:
-        return "Eje"
+    return "Eje"
 
 # Consultar cuadrantes
 print("\nCuadrantes:")
-print(f"A pertenece al cuadrante: {cuadrante(A)}")
-print(f"C pertenece al cuadrante: {cuadrante(C)}")
-print(f"D pertenece al cuadrante: {cuadrante(D)}")
+for nombre in ["A", "C", "D"]:
+    print(f"{nombre} pertenece al cuadrante: {cuadrante(puntos[nombre])}")
 
 # Función para calcular un vector entre dos puntos
 def vector(p1, p2):
     return (p2[0] - p1[0], p2[1] - p1[1])
 
 # Consultar vectores AB y BA
-AB = vector(A, B)
-BA = vector(B, A)
+AB = vector(puntos["A"], puntos["B"])
+BA = vector(puntos["B"], puntos["A"])
 print("\nVectores:")
 print(f"Vector AB: {AB}")
 print(f"Vector BA: {BA}")
@@ -49,23 +47,20 @@ def distancia(p1, p2):
     return math.sqrt((p2[0] - p1[0])**2 + (p2[1] - p1[1])**2)
 
 # Consultar distancias entre A y B, y B y A
-dist_AB = distancia(A, B)
-dist_BA = distancia(B, A)
+dist_AB = distancia(puntos["A"], puntos["B"])
 print("\nDistancias:")
 print(f"Distancia entre A y B: {dist_AB}")
-print(f"Distancia entre B y A: {dist_BA}")
+print(f"Distancia entre B y A: {dist_AB}")  # Es la misma, no es necesario calcularla dos veces
 
 # Determinar el punto más lejano del origen
-dist_A = distancia(A, D)
-dist_B = distancia(B, D)
-dist_C = distancia(C, D)
-mas_lejano = max((dist_A, "A"), (dist_B, "B"), (dist_C, "C"))
+distancias = {nombre: distancia(coord, puntos["D"]) for nombre, coord in puntos.items()}
+mas_lejano = max(distancias.items(), key=lambda x: x[1])
 print("\nPunto más lejano del origen:")
-print(f"El punto más lejano del origen es {mas_lejano[1]} con una distancia de {mas_lejano[0]}")
+print(f"El punto más lejano del origen es {mas_lejano[0]} con una distancia de {mas_lejano[1]}")
 
 # Crear un rectángulo utilizando los puntos A y B
-base = abs(B[0] - A[0])
-altura = abs(B[1] - A[1])
+base = abs(puntos["B"][0] - puntos["A"][0])
+altura = abs(puntos["B"][1] - puntos["A"][1])
 area = base * altura
 print("\nRectángulo:")
 print(f"Base: {base}")
